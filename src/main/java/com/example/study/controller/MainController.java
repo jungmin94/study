@@ -34,7 +34,7 @@ public class MainController {
             String extension = fileName.substring(fileName.indexOf('.')+1);
 
             Workbook workbook = null;
-            //엑셀 확장자에따라 Workbook instance 생성
+            //엑셀 확장자 형식에따라 Workbook instance 생성
             if(extension.equals("xlsx")){
                 workbook = new XSSFWorkbook(file.getInputStream());
             }else if(extension.equals("xls")){
@@ -59,7 +59,7 @@ public class MainController {
 
                     //타입별로 값을 가져와 value에 저장한다.
                     switch (cell.getCellType()){
-                        case FORMULA : //계산식
+                        case FORMULA : //계산식처리
                                 value =cell.getCellFormula();
                                 break;
                         case NUMERIC : //숫자

@@ -29,14 +29,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    compile group: 'org.apache.poi', name: 'poi', version: '3.11'
-//    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.11'
-//    compile group: 'commons-io', name: 'commons-io', version: '2.4'
-
-    // jsp
-//    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
-//    implementation 'javax.servlet:jstl'
-//    implementation 'javax.servlet.jsp.jstl:jstl-api:1.2'
 
     // poi
     implementation 'org.apache.poi:poi:4.1.0'
