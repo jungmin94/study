@@ -1,6 +1,6 @@
 package com.example.study.controller;
 
-import com.example.study.common.ExcelUtill;
+import com.example.study.common.ExcelUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -27,42 +27,20 @@ public class ExcelController {
         return "excel";
     }
 
+
+    /*
+     * 엑셀 첫번째시트를 불러와 읽는다
+     */
     @RequestMapping("/readExcel")
     public String readExcel(@RequestParam("file") MultipartFile file, Model model)
             throws IOException {
-        List<ArrayList> dataList = new ArrayList<>();
+        //getWorkbook 엑셀 가져오기
+        // 엑셀 validation확인 후 엑셀 확장자형식에따라 반환
+        Workbook workbook = ExcelUtil.getWorkbook(file);
 
-        //getWorkbook 엑셀가져오기
-        Workbook workbook = ExcelUtill.getWorkbook(file);
-
-
-        //getSheet (파라미터 인덱스)
-        // workbook의 첫번째 시트 가져오기
-        Sheet worksheet = workbook.getSheetAt(0);
-
-        // 모든 행(row)들을 조회한다
-        for(Row row : worksheet) {
-            //row의 모든 cell들을 순회한다
-            Iterator<Cell> cellIterator = row.cellIterator();
-
-            ArrayList<String> datas = new ArrayList<>();
-
-            //cell의 수만큼 조회한다
-            while(cellIterator.hasNext()){
-                //cell의 타입하고 값을 가져온다
-                Cell cell = cellIterator.next();
-
-                String value = ExcelUtill.getCellValue(cell);
-
-                //저장된 value값을 datas에 넣는다.
-                datas.add(value);
-            }
-            //한 row의 값들을 dataList에 넣는다
-            dataList.add(datas);
-        }
-
-        model.addAttribute("dataList",dataList);
-
+        //우선!! 원하는 시트의 데이터값들을 가져옴
+        List<ArrayList> sheet1 = ExcelUtil.getWorksheet(workbook,1);
+        model.addAttribute("dataList",sheet1);
         return "excelList";
     }
 }
